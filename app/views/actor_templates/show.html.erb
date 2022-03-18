@@ -63,10 +63,6 @@
     </th>
 
     <th>
-      Year
-    </th>
-
-    <th>
       Director
     </th>
 
@@ -77,35 +73,16 @@
     <th>
     </th>
   </tr>
-
-  <% a_id = @the_actor.id %>
-
-  <% matching_characters = Character.where({ :actor_id => a_id }) %>
-
-  <% matching_characters.each do |a_character| %>
-    <% m_id = a_character.movie_id %>
-
-    <% matching_movies = Movie.where({ :id => m_id }) %>
-
-    <% the_movie = matching_movies.at(0) %>
-
+  
+  <% @the_actor.characters.each do |a_character| %>
+    <% the_movie = a_character.movie %>
     <tr>
       <td>
-        <%= the_movie.title %>
+        <%= the_movie.title_with_year %>
       </td>
 
       <td>
-        <%= the_movie.year %>
-      </td>
-
-      <td>
-        <% d_id = the_movie.director_id %>
-        
-        <% matching_directors = Director.where({ :id => d_id }) %>
-        
-        <% the_director = matching_directors.at(0) %>
-
-        <%= the_director.name %>
+        <%= the_movie.director.name %>
       </td>
 
       <td>
